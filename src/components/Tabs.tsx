@@ -2,11 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
 
-export default () => {
+export default (props: TabsProps) => {
+  const [mActiveKey, mSetActiveKey] = React.useState(props.activeKey || 0);
+
+  const handleClick = (key: number) => {
+    mSetActiveKey(key);
+    if (props.onClick != null) {
+      props.onClick(key);
+    }
+  };
+
   return (
     <StyledTabs className="tabs">
-      <li className="active">Generator</li>
-      <li>About</li>
+      {props.panes.map((o, i) => (
+        <li
+          key={i}
+          className={mActiveKey === i ? "active" : undefined}
+          onClick={() => handleClick(i)}
+        >
+          {o.label}
+        </li>
+      ))}
     </StyledTabs>
   );
 };
@@ -34,10 +50,22 @@ const StyledTabs = styled.ul`
     &:hover:not(.active) {
       color: ${colors.text.base};
     }
+    box-shadow: inset 0px -10px 10px -13px rgba(0, 0, 0, 0.25);
   }
   .active {
+    box-shadow: none;
     border-bottom-color: ${colors.bg.lightest};
     color: ${colors.red.base};
     background-color: ${colors.bg.lightest};
   }
 `;
+
+type TabsProps = {
+  activeKey?: number;
+  panes: PaneProps[];
+  onClick?: (key: number) => void;
+};
+
+type PaneProps = {
+  label: string;
+};

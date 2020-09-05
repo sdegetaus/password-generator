@@ -15,7 +15,17 @@ export default () => {
         <span>({packageJson.version})</span>
       </section>
       <section className="card">
-        <Tabs />
+        <Tabs
+          // onClick={(k) => console.log(k)}
+          panes={[
+            {
+              label: "Generator",
+            },
+            {
+              label: "About",
+            },
+          ]}
+        />
         <div className="content">
           <Form />
         </div>
