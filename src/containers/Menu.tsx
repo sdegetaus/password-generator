@@ -1,13 +1,22 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { Link } from "react-router-dom";
-import { useRenderCount } from "../hooks";
 
 export default () => {
-  const [mActiveKey, mSetActiveKey] = React.useState(0);
-  useRenderCount("Menu");
+  // File members
+  const mHistory = useHistory();
+  const [mActiveKey, mSetActiveKey] = React.useState(() => {
+    switch (mHistory.location.pathname.substring(1)) {
+      default:
+      case "":
+        return 0;
+      case "about":
+        return 1;
+    }
+  });
 
+  // Functions
   const handleClick = (key: number) => {
     mSetActiveKey(key);
   };
