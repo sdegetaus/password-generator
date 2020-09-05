@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { ID } from "../consts";
 
 export default (props: RangeProps) => {
   const [mValue, mSetValue] = useState(props.value || 0);
@@ -15,18 +14,18 @@ export default (props: RangeProps) => {
   };
 
   return (
-    <>
+    <div className={`range form-item`}>
       {props.label && <label>{props.label}</label>}
       <StyledInput
+        type="range"
         id={props.name}
         name={props.name}
-        type={ID.range}
         min={props.min}
         max={props.max}
         value={mValue}
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 };
 

@@ -75,9 +75,11 @@ const StyledTabs = styled.div`
     box-shadow: inset 0px -10px 10px -13px rgba(0, 0, 0, 0.25);
   }
   .active {
+    pointer-events: none;
+    cursor: default;
     box-shadow: none;
     border-bottom-color: ${colors.bg.lightest};
-    color: ${colors.red.base};
+    color: ${colors.blue.dark};
     background-color: ${colors.bg.lightest};
   }
 `;

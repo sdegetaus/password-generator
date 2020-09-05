@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { ID } from "../consts";
 
 export default (props: RangeProps) => {
   const [mChecked, mSetChecked] = useState(props.checked || false);
@@ -14,17 +13,17 @@ export default (props: RangeProps) => {
   };
 
   return (
-    <>
-      {props.label && <label>{props.label}</label>}
+    <div className={`checkbox form-item ${mChecked && "checked"}`}>
+      {props.label && <label htmlFor={props.name}>{props.label}</label>}
       <StyledCheckbox
+        type="checkbox"
         id={props.name}
         name={props.name}
-        type={ID.checkbox}
         value={props.name}
         checked={mChecked}
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 };
 

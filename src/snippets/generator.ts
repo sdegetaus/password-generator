@@ -12,12 +12,14 @@ export function randomString(
     numbers: boolean;
     lowercase: boolean;
     uppercase: boolean;
+    accented: boolean;
   }
 ): string {
   // char sets
   const symbols = ";,:.¡!¿?/\\(){}[]<>+-_*=^~`'°|¬@#€$%&";
-  const alphabet = "abdcefghijklmnopqrstuvwxyz";
   const digits = "0123456789";
+  const alphabet = "abdcefghijklmnopqrstuvwxyz";
+  const accented = "áéíóúàèìòùâêîôûñäëïöü";
 
   // sum of all the "true" values from the include param
   const boolSum = [
@@ -25,6 +27,7 @@ export function randomString(
     include.numbers,
     include.lowercase,
     include.uppercase,
+    include.accented,
   ].reduce((p, c) => (c === true ? p + 1 : p), 0);
 
   // can't divide by zero!
@@ -47,6 +50,7 @@ export function randomString(
       res += randomCharFromString(digits);
       continue;
     }
+
     if (include.lowercase && chanceOf(chance)) {
       res += randomCharFromString(alphabet);
       continue;
@@ -54,6 +58,12 @@ export function randomString(
     if (include.uppercase && chanceOf(chance)) {
       res += randomCharFromString(alphabet.toUpperCase());
       continue;
+    }
+
+    if (include.accented && chanceOf(chance)) {
+      res += randomCharFromString(
+        chanceOf(0.5) ? accented : accented.toUpperCase()
+      );
     }
   }
 
