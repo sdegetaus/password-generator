@@ -1,40 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
+import { Link } from "react-router-dom";
+import { useRenderCount } from "../hooks";
 
-export default (props: TabsProps) => {
-  const [mActiveKey, mSetActiveKey] = React.useState(props.activeKey || 0);
+export default () => {
+  const [mActiveKey, mSetActiveKey] = React.useState(0);
+  useRenderCount("Menu");
 
   const handleClick = (key: number) => {
     mSetActiveKey(key);
-    if (props.onClick != null) {
-      props.onClick(key);
-    }
   };
 
   return (
     <StyledTabs className="tabs">
-      {props.panes.map((o, i) => (
-        <li
+      {items.map((o, i) => (
+        <Link
           key={i}
+          to={o.to}
           className={mActiveKey === i ? "active" : undefined}
           onClick={() => handleClick(i)}
         >
           {o.label}
-        </li>
+        </Link>
       ))}
     </StyledTabs>
   );
 };
 
-const StyledTabs = styled.ul`
+const items: MenuItem[] = [
+  {
+    label: "Generator",
+    to: "/",
+  },
+  {
+    label: "About",
+    to: "/about",
+  },
+];
+
+const StyledTabs = styled.div`
   list-style: none;
   margin: 0;
   padding: 0;
   width: 100%;
   display: inline-flex;
   justify-content: space-around;
-  li {
+  a {
+    text-decoration: none;
     transition: color 0.3s;
     text-shadow: 0 1px white;
     font-size: 18px;
@@ -60,12 +73,7 @@ const StyledTabs = styled.ul`
   }
 `;
 
-type TabsProps = {
-  activeKey?: number;
-  panes: PaneProps[];
-  onClick?: (key: number) => void;
-};
-
-type PaneProps = {
+type MenuItem = {
   label: string;
+  to: string;
 };

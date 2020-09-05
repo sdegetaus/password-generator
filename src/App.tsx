@@ -1,36 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { Form, Tabs } from "./components";
+import packageJson from "../package.json";
+import { Menu, About, Generator } from "./containers";
 import { useRenderCount } from "./hooks";
 import { colors } from "./styles/colors";
-import packageJson from "../package.json";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default () => {
   useRenderCount("App");
 
   return (
-    <StyledApp>
-      <section className="title">
-        <h1>Password Generator</h1>
-        <span>({packageJson.version})</span>
-      </section>
-      <section className="card">
-        <Tabs
-          // onClick={(k) => console.log(k)}
-          panes={[
-            {
-              label: "Generator",
-            },
-            {
-              label: "About",
-            },
-          ]}
-        />
-        <div className="content">
-          <Form />
-        </div>
-      </section>
-    </StyledApp>
+    <Router>
+      <StyledApp>
+        <section className="title">
+          <h1>Password Generator</h1>
+          <span>({packageJson.version})</span>
+        </section>
+        <section className="card">
+          <Menu />
+          <div className="content">
+            <Switch>
+              <Route path="/" component={Generator} exact />
+              <Route path="/about" component={About} />
+            </Switch>
+          </div>
+        </section>
+      </StyledApp>
+    </Router>
   );
 };
 
