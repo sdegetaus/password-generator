@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import { Checkbox, Range } from "components";
+import { ID } from "consts";
+import React, { useRef, useState } from "react";
+import { randomString } from "snippets/generator";
 import styled from "styled-components";
-import { Checkbox, Range } from "../components";
-import { ID } from "../consts";
-import { randomString } from "../snippets/generator";
-import { colors } from "../styles/colors";
+import { colors } from "styles/colors";
 
 export default () => {
   // File members

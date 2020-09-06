@@ -1,10 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import packageJson from "../package.json";
-import { Menu, About, Generator } from "./containers";
-import { useRenderCount } from "./hooks";
-import { colors } from "./styles/colors";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { About, Generator, Menu } from "containers";
+import { useRenderCount } from "hooks";
+import { colors } from "styles/colors";
 
 export default () => {
   useRenderCount("App");
@@ -32,8 +32,7 @@ export default () => {
 
 const StyledApp = styled.div`
   background-color: ${colors.bg.dark};
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   flex-flow: column;
@@ -62,6 +61,7 @@ const StyledApp = styled.div`
     padding: 25px;
     padding: 0;
     margin: 0;
+    margin-bottom: 80px;
   }
   .content {
     padding: 25px;

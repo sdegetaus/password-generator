@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { colors } from "../styles/colors";
+import { colors } from "styles/colors";
 
 export default (props: RangeProps) => {
   const [mChecked, mSetChecked] = useState(props.checked || false);

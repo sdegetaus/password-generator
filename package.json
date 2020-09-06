@@ -1,5 +1,9 @@
 {
   "name": "password-generator.app",
+  "author": {
+    "name": "Santiago Degetau",
+    "url": "https://taus.mx"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "repository": {
+    "url": "github repo"
   }
 }
