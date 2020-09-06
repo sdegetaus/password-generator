@@ -15,6 +15,7 @@ export default () => {
         >
           {packageJson.author.name}
         </a>
+        .
       </p>
       <p>
         See the{" "}

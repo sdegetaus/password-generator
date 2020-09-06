@@ -29,12 +29,6 @@ const StyledCheckbox = styled.div`
   position: relative;
   transition: all 0.3s;
 
-  label {
-    display: block;
-    position: relative;
-    overflow: hidden;
-  }
-
   .checkmark {
     transition: all 0.3s;
     margin-right: 10px;

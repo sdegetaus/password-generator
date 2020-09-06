@@ -23,8 +23,6 @@ export default () => {
 
   const [mPassword, mSetPassword] = useState("");
 
-  const pwdInputRef = useRef<HTMLTextAreaElement>(null);
-
   React.useEffect(() => {
     // if all char sets are set to false: set error
     if (
@@ -52,34 +50,20 @@ export default () => {
         ...mValues,
       })
     );
-    resizeTextarea();
   }, [mValues]);
 
-  React.useEffect(() => {
-    resizeTextarea();
-  }, []);
-
   // Functions
-  const resizeTextarea = () => {
-    if (pwdInputRef.current != null) {
-      pwdInputRef.current.style.height = "auto";
-      pwdInputRef.current.style.height =
-        pwdInputRef.current.scrollHeight + "px";
-    }
-  };
-
   const handleChange = (name: string, value: unknown) => {
     mSetValues({
       ...mValues,
       [name]: value,
     });
-    resizeTextarea();
   };
 
   const copyToClipboard = () => {
-    console.log(pwdInputRef.current);
-    pwdInputRef.current?.select();
-    document.execCommand("copy");
+    if (mError.error === false) {
+      document.execCommand("copy");
+    }
   };
 
   return (
@@ -88,7 +72,7 @@ export default () => {
         label={`Length (${mValues.length})`}
         name={ID.length}
         min={8}
-        max={100}
+        max={1024}
         value={Number(mValues.length)}
         onChange={handleChange}
       />
@@ -109,13 +93,7 @@ export default () => {
         className={`result ${mError.error ? "error" : ""}`}
         onClick={() => copyToClipboard()}
       >
-        <textarea
-          rows={1}
-          style={{ height: "1em" }}
-          ref={pwdInputRef}
-          value={!mError.error ? mPassword : mError.message}
-          readOnly
-        />
+        {!mError.error ? mPassword : mError.message}
       </section>
     </StyledGenerator>
   );
@@ -171,6 +149,9 @@ const StyledGenerator = styled.form`
     }
   }
   .result {
+    cursor: pointer;
+    user-select: all;
+    word-break: break-all;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -182,28 +163,15 @@ const StyledGenerator = styled.form`
     border: 1px solid white;
     padding: 25px;
     background-color: ${colors.blue.dark};
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    line-height: 1em;
     &.error {
+      user-select: none;
+      word-break: break-word;
       background-color: ${colors.red.base};
-    }
-
-    textarea {
-      background: transparent;
-      appearance: none;
-      cursor: pointer;
-      font: inherit;
-      border: 0 none white;
-      overflow: hidden;
-      width: 100%;
-      outline: none;
-      resize: none;
-      padding: 0;
-      margin: 0;
-      word-break: break-all;
-      font-size: 20px;
-      color: white;
-      text-align: center;
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-      line-height: 1em;
     }
   }
 `;
