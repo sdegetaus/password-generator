@@ -8,7 +8,7 @@ import { colors } from "styles/colors";
 export default () => {
   // File members
   const [mValues, mSetValues] = useState({
-    length: 16,
+    length: 32,
     symbols: true,
     numbers: true,
     lowercase: true,
@@ -63,7 +63,7 @@ export default () => {
   };
 
   const copyToClipboard = () => {
-    if (mError.error === false) {
+    if (!mError.error) {
       document.execCommand("copy");
       mSetHasCopied(true);
     }
