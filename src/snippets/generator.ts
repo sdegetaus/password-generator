@@ -67,11 +67,6 @@ export function randomString(
     }
   }
 
-  // temp error catcher
-  if (res.length !== length) {
-    throw new Error("INCORRECT Lenght!");
-  }
-
   return res;
 }
 

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
+import { colors } from "../styles/colors";
 
 export default (props: RangeProps) => {
   const [mChecked, mSetChecked] = useState(props.checked || false);
@@ -13,9 +14,8 @@ export default (props: RangeProps) => {
   };
 
   return (
-    <div className={`checkbox form-item ${mChecked && "checked"}`}>
-      {props.label && <label htmlFor={props.name}>{props.label}</label>}
-      <StyledCheckbox
+    <StyledCheckbox className={`checkbox form-item ${mChecked && "checked"}`}>
+      <input
         type="checkbox"
         id={props.name}
         name={props.name}
@@ -23,11 +23,63 @@ export default (props: RangeProps) => {
         checked={mChecked}
         onChange={handleChange}
       />
-    </div>
+      <span className="checkmark"></span>
+      {props.label && <label htmlFor={props.name}>{props.label}</label>}
+    </StyledCheckbox>
   );
 };
 
-const StyledCheckbox = styled.input``;
+const StyledCheckbox = styled.div`
+  position: relative;
+  transition: all 0.3s;
+
+  &:hover input ~ .checkmark {
+    background-color: #c6cdce;
+  }
+
+  input {
+    position: absolute;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    appearance: none;
+    margin: 0;
+    padding: 0;
+
+    &:checked ~ .checkmark {
+      background-color: ${colors.blue.base};
+      border-radius: 1px;
+      box-shadow: none;
+    }
+
+    &:checked ~ .checkmark:after {
+      display: block;
+    }
+  }
+
+  .checkmark {
+    transition: all 0.3s;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    background-color: ${colors.bg.light};
+
+    &:after {
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      display: none;
+      left: 7px;
+      top: 3px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+  }
+`;
 
 type RangeProps = {
   name: string;

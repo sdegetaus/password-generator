@@ -9,9 +9,9 @@ export default () => {
   // File members
   const [mValues, mSetValues] = useState({
     length: 16,
-    symbols: false,
+    symbols: true,
     numbers: true,
-    lowercase: false,
+    lowercase: true,
     uppercase: true,
     accented: false,
   });
@@ -52,11 +52,12 @@ export default () => {
         ...mValues,
       })
     );
+    resizeTextarea();
   }, [mValues]);
 
   React.useEffect(() => {
     resizeTextarea();
-  }, [pwdInputRef.current]);
+  }, []);
 
   // Functions
   const resizeTextarea = () => {
@@ -67,7 +68,7 @@ export default () => {
     }
   };
 
-  const handleChange = (name: string, value: any) => {
+  const handleChange = (name: string, value: unknown) => {
     mSetValues({
       ...mValues,
       [name]: value,
@@ -130,7 +131,7 @@ const StyledGenerator = styled.form`
     margin-bottom: 15px;
   }
   fieldset {
-    margin: 15px 0 25px;
+    margin: 10px 0 20px;
     appearance: none;
     padding: 0;
     border: none;
@@ -142,7 +143,7 @@ const StyledGenerator = styled.form`
     .form-item {
       display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       color: ${colors.text.disabled};
       text-decoration: line-through;
       &:not(:last-child) {
