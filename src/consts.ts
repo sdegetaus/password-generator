@@ -1,8 +1,10 @@
 export const ID = {
-  length: "length",
-  symbols: "symbols",
-  numbers: "numbers",
-  lowercase: "lowercase",
-  uppercase: "uppercase",
   accented: "accented",
+  hidden: "hidden",
+  length: "length",
+  lowercase: "lowercase",
+  numbers: "numbers",
+  symbols: "symbols",
+  text: "text",
+  uppercase: "uppercase",
 };
