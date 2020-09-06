@@ -1,6 +1,6 @@
-import { Checkbox, Range } from "components";
+import { Button, Checkbox, Range, Tooltip } from "components";
 import { ID } from "consts";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { randomString } from "snippets/generator";
 import styled from "styled-components";
 import { colors } from "styles/colors";
@@ -22,6 +22,7 @@ export default () => {
   });
 
   const [mPassword, mSetPassword] = useState("");
+  const [mHasCopied, mSetHasCopied] = useState(false);
 
   React.useEffect(() => {
     // if all char sets are set to false: set error
@@ -50,6 +51,7 @@ export default () => {
         ...mValues,
       })
     );
+    mSetHasCopied(false);
   }, [mValues]);
 
   // Functions
@@ -63,16 +65,17 @@ export default () => {
   const copyToClipboard = () => {
     if (mError.error === false) {
       document.execCommand("copy");
+      mSetHasCopied(true);
     }
   };
 
   return (
     <StyledGenerator onSubmit={(e) => e.preventDefault()}>
       <Range
-        label={`Length (${mValues.length})`}
+        label={`Character Length (${mValues.length})`}
         name={ID.length}
         min={8}
-        max={1024}
+        max={512}
         value={Number(mValues.length)}
         onChange={handleChange}
       />
@@ -89,12 +92,31 @@ export default () => {
           />
         ))}
       </fieldset>
-      <section
-        className={`result ${mError.error ? "error" : ""}`}
-        onClick={() => copyToClipboard()}
-      >
-        {!mError.error ? mPassword : mError.message}
+      <section className="actions">
+        <h4>Actions</h4>
+        <Button
+          onClick={() => {
+            mSetPassword(
+              randomString(mValues.length, {
+                ...mValues,
+              })
+            );
+            mSetHasCopied(false);
+          }}
+        >
+          Regenerate
+        </Button>
       </section>
+      <Tooltip
+        label={`${!mHasCopied ? "Copy to Clipboard" : "Copied to Clipboard!"}`}
+      >
+        <section
+          className={`result ${mError.error ? "error" : ""}`}
+          onClick={() => copyToClipboard()}
+        >
+          {!mError.error ? mPassword : mError.message}
+        </section>
+      </Tooltip>
     </StyledGenerator>
   );
 };
@@ -148,6 +170,14 @@ const StyledGenerator = styled.form`
       }
     }
   }
+
+  .actions {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .result {
     cursor: pointer;
     user-select: all;
@@ -158,17 +188,19 @@ const StyledGenerator = styled.form`
     transition: background-color 0.3s;
     color: white;
     border-radius: 3px;
-    font-weight: 200;
+    font-weight: 300;
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 5px 5px 8px -3px rgba(0, 0, 0, 0.1);
     padding: 25px;
-    background-color: ${colors.blue.dark};
+    background-color: ${colors.bg.light};
     font-size: 20px;
-    color: white;
+    color: ${colors.text.base};
     text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-    line-height: 1em;
+    line-height: 1.15em;
     &.error {
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+      color: white;
       user-select: none;
       word-break: break-word;
       background-color: ${colors.red.base};

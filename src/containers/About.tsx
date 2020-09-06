@@ -7,7 +7,7 @@ export default () => {
   return (
     <StyledAbout>
       <p>
-        Learning project created by{" "}
+        React.js learning project created by{" "}
         <a
           href={packageJson.author.url}
           target="_blank"
@@ -26,13 +26,19 @@ export default () => {
         >
           GitHub repository
         </a>{" "}
-        for more info.
+        for more info about the project's learnings and goals.
       </p>
     </StyledAbout>
   );
 };
 
 const StyledAbout = styled.div`
+  text-align: center;
+  margin: 40px 0;
+
+  p:not(:last-child) {
+    margin-bottom: 10px;
+  }
   a {
     transition: all 0.3s;
     color: ${colors.blue.dark};
