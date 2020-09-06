@@ -6,6 +6,7 @@ export const colors = {
   bg: {
     lightest: "#ecf0f1",
     light: "#dce4e5",
+    light_hover: "#c6cdce",
     dark: "#2c3e50",
   },
   red: {

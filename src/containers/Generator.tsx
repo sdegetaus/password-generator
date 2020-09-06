@@ -128,7 +128,7 @@ const StyledGenerator = styled.form`
     color: black;
   }
   .range {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   fieldset {
     margin: 10px 0 20px;

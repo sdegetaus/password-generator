@@ -34,7 +34,7 @@ const StyledCheckbox = styled.div`
   transition: all 0.3s;
 
   &:hover input ~ .checkmark {
-    background-color: #c6cdce;
+    background-color: ${colors.bg.light_hover};
   }
 
   input {
