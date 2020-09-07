@@ -2,18 +2,24 @@ import { Button, Checkbox, Range, Tooltip } from "components";
 import { ID } from "consts";
 import React, { useState } from "react";
 import { randomString } from "snippets/generator";
+import { getPrefs, savePrefs } from "snippets/prefs";
 import styled from "styled-components";
 import { colors } from "styles/colors";
 
 export default () => {
   // File members
-  const [mValues, mSetValues] = useState({
-    length: 32,
-    symbols: true,
-    numbers: true,
-    lowercase: true,
-    uppercase: true,
-    accented: false,
+  const [mValues, mSetValues] = useState(() => {
+    const prefs = getPrefs();
+    return prefs === null
+      ? {
+          length: 32,
+          symbols: true,
+          numbers: true,
+          lowercase: true,
+          uppercase: true,
+          accented: true,
+        }
+      : prefs;
   });
 
   const [mError, mSetError] = useState({
@@ -57,6 +63,10 @@ export default () => {
   // Functions
   const handleChange = (name: string, value: unknown) => {
     mSetValues({
+      ...mValues,
+      [name]: value,
+    });
+    savePrefs({
       ...mValues,
       [name]: value,
     });

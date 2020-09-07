@@ -7,4 +7,5 @@ export const ID = {
   symbols: "symbols",
   text: "text",
   uppercase: "uppercase",
+  prefs: "prefs",
 };
