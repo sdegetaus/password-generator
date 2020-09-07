@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors } from "styles/colors";
+import { colors } from "assets";
 
 export default (props: CheckboxProps) => {
   const [mChecked, mSetChecked] = useState(props.checked || false);

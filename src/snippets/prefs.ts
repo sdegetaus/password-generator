@@ -9,7 +9,7 @@ export function savePrefs(values: object) {
 }
 
 /**
- * Get previous form preferences. If non exist, returns null.
+ * Get previous form preferences. If none exist, returns null.
  */
 export function getPrefs() {
   const prefs = localStorage.getItem(ID.prefs);

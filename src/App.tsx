@@ -1,10 +1,10 @@
+import { About, Generator, Menu } from "containers";
+import { useRenderCount } from "hooks";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import { colors } from "assets";
 import packageJson from "../package.json";
-import { About, Generator, Menu } from "containers";
-import { useRenderCount } from "hooks";
-import { colors } from "styles/colors";
 
 export default () => {
   useRenderCount("App");

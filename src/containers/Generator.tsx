@@ -1,10 +1,10 @@
 import { Button, Checkbox, Range, Tooltip } from "components";
 import { ID } from "consts";
 import React, { useState } from "react";
-import { randomString } from "snippets/generator";
+import { randomPassword } from "snippets/generator";
 import { getPrefs, savePrefs } from "snippets/prefs";
 import styled from "styled-components";
-import { colors } from "styles/colors";
+import { colors } from "assets";
 
 export default () => {
   // File members
@@ -53,7 +53,7 @@ export default () => {
 
     // set random password
     mSetPassword(
-      randomString(mValues.length, {
+      randomPassword(mValues.length, {
         ...mValues,
       })
     );
@@ -107,7 +107,7 @@ export default () => {
         <Button
           onClick={() => {
             mSetPassword(
-              randomString(mValues.length, {
+              randomPassword(mValues.length, {
                 ...mValues,
               })
             );

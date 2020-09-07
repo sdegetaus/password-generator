@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "styles/colors";
+import { colors } from "assets";
 import packageJson from "../../package.json";
 
 export default () => {
   return (
     <StyledAbout>
+      <p>Simple React.js app for generating random passwords.</p>
       <p>
-        React.js learning project created by{" "}
+        Project solely meant for personal education reasons, created by{" "}
         <a
           href={packageJson.author.url}
           target="_blank"
