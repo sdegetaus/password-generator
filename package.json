@@ -4,7 +4,7 @@
     "name": "Santiago Degetau",
     "url": "https://taus.mx"
   },
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -46,6 +46,6 @@
     ]
   },
   "repository": {
-    "url": "todo"
+    "url": "https://github.com/sdegetaus/password-generator"
   }
 }
