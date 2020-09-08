@@ -8,4 +8,5 @@ export const ID = {
   text: "text",
   uppercase: "uppercase",
   prefs: "prefs",
+  exclude_ambiguous: "exclude_ambiguous",
 };

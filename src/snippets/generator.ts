@@ -13,10 +13,13 @@ export function randomPassword(
     lowercase: boolean;
     uppercase: boolean;
     accented: boolean;
+    exclude_ambiguous: boolean;
   }
 ): string {
   // char sets
-  const symbols = ";,:.¡!¿?/\\(){}[]<>+-_*=^~`'°|¬@#€$%&";
+  const symbols = !include.exclude_ambiguous
+    ? ";,:.!?/\\(){}[]<>+-_*=^~`'°|¬@#$%&"
+    : "!?+-_*=@#$%&";
   const digits = "0123456789";
   const alphabet = "abdcefghijklmnopqrstuvwxyz";
   const accented = "áéíóúàèìòùâêîôûñäëïöü";
@@ -27,7 +30,6 @@ export function randomPassword(
     include.numbers,
     include.lowercase,
     include.uppercase,
-    include.accented,
   ].reduce((p, c) => (c === true ? p + 1 : p), 0);
 
   // can't divide by zero!

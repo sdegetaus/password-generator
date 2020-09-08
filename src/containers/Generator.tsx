@@ -18,6 +18,7 @@ export default () => {
           lowercase: true,
           uppercase: true,
           accented: true,
+          exclude_ambiguous: false,
         }
       : prefs;
   });
@@ -262,5 +263,16 @@ const includeData = [
       </>
     ),
     name: ID.accented,
+  },
+  {
+    label: (
+      <>
+        Exclude Ambiguous Characters{" "}
+        <span>
+          (e.g. {"{}"}[]()/\'"`~,;:.{"<>"})
+        </span>
+      </>
+    ),
+    name: ID.exclude_ambiguous,
   },
 ];
