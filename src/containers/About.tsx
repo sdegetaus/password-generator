@@ -35,10 +35,14 @@ export default () => {
 
 const StyledAbout = styled.div`
   text-align: center;
-  margin: 40px 0;
+  margin: 40px 60px;
 
-  p:not(:last-child) {
-    margin-bottom: 10px;
+  p {
+    line-height: 1.5em;
+    text-shadow: 0 1px 0 white;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
   a {
     transition: all 0.3s;
