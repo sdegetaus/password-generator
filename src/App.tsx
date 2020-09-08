@@ -1,4 +1,4 @@
-import { About, Generator, Menu } from "containers";
+import { About, ErrorHandler, Generator, Menu } from "containers";
 import { useRenderCount } from "hooks";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -10,23 +10,25 @@ export default () => {
   useRenderCount("App");
 
   return (
-    <Router>
-      <StyledApp>
-        <section className="title">
-          <h1>Password Generator</h1>
-          <span>({packageJson.version})</span>
-        </section>
-        <section className="card">
-          <Menu />
-          <div className="content">
-            <Switch>
-              <Route path="/" component={Generator} exact />
-              <Route path="/about" component={About} />
-            </Switch>
-          </div>
-        </section>
-      </StyledApp>
-    </Router>
+    <ErrorHandler>
+      <Router>
+        <StyledApp>
+          <section className="title">
+            <h1>Password Generator</h1>
+            <span>({packageJson.version})</span>
+          </section>
+          <section className="card">
+            <Menu />
+            <div className="content">
+              <Switch>
+                <Route path="/" component={Generator} exact />
+                <Route path="/about" component={About} />
+              </Switch>
+            </div>
+          </section>
+        </StyledApp>
+      </Router>
+    </ErrorHandler>
   );
 };
 
