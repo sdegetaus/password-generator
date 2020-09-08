@@ -26,7 +26,6 @@ export default () => {
     error: false,
     message: "",
   });
-
   const [mPassword, mSetPassword] = useState("");
   const [mHasCopied, mSetHasCopied] = useState(false);
 
@@ -51,6 +50,15 @@ export default () => {
       });
     }
 
+    if (
+      mValues.uppercase === false &&
+      mValues.lowercase === false &&
+      mValues.accented === true
+    ) {
+      mSetValues({ ...mValues, accented: false });
+      return;
+    }
+
     // set random password
     mSetPassword(
       randomPassword(mValues.length, {
@@ -58,15 +66,16 @@ export default () => {
       })
     );
     mSetHasCopied(false);
+
+    // save
+    savePrefs({
+      ...mValues,
+    });
   }, [mValues]);
 
   // Functions
-  const handleChange = (name: string, value: unknown) => {
+  const handleChange = async (name: string, value: unknown) => {
     mSetValues({
-      ...mValues,
-      [name]: value,
-    });
-    savePrefs({
       ...mValues,
       [name]: value,
     });
@@ -96,7 +105,6 @@ export default () => {
             key={o.name}
             label={o.label}
             name={o.name}
-            // @ts-ignore
             checked={mValues[o.name]}
             onChange={handleChange}
           />
@@ -173,10 +181,6 @@ const StyledGenerator = styled.form`
           font-weight: 200;
           font-size: 14px;
         }
-      }
-      label,
-      input {
-        cursor: pointer;
       }
     }
   }
