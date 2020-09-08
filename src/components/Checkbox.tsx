@@ -3,10 +3,19 @@ import styled from "styled-components";
 import { colors } from "assets";
 
 export default (props: CheckboxProps) => {
-  const [mChecked, mSetChecked] = useState(props.checked || false);
+  const [mChecked, mSetChecked] = useState<boolean>();
+  const [mDisabled, mSetDisabled] = useState<boolean>();
+
+  React.useEffect(() => {
+    mSetChecked(props.checked ?? false);
+    mSetDisabled(props.disabled ?? false);
+  }, [props.checked, props.disabled]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
+    if (mDisabled) {
+      return;
+    }
     const checked = !mChecked;
     if (props.onChange != null) {
       props.onChange(props.name, checked);
@@ -16,7 +25,9 @@ export default (props: CheckboxProps) => {
 
   return (
     <StyledCheckbox
-      className={`checkbox form-item ${mChecked ? "checked" : ""}`}
+      className={`checkbox form-item ${mChecked ? "checked" : ""} ${
+        mDisabled ? "disabled" : ""
+      }`}
       onClick={handleClick}
     >
       <span className="checkmark"></span>
@@ -28,6 +39,11 @@ export default (props: CheckboxProps) => {
 const StyledCheckbox = styled.div`
   position: relative;
   transition: all 0.3s;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.6;
+  }
 
   .checkmark {
     transition: all 0.3s;
@@ -35,6 +51,7 @@ const StyledCheckbox = styled.div`
     height: 20px;
     width: 20px;
     background-color: ${colors.bg.light};
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.8);
 
     &:after {
       content: "";
@@ -58,17 +75,24 @@ const StyledCheckbox = styled.div`
         display: block;
       }
     }
-    &:hover {
-      .checkmark {
-        background-color: ${colors.blue.dark};
-      }
+  }
+
+  &.checked:not(.disabled):hover {
+    .checkmark {
+      background-color: ${colors.blue.dark};
     }
   }
 
-  &:hover {
-    cursor: pointer;
+  &:not(.disabled):hover {
     .checkmark {
       background-color: ${colors.bg.light_hover};
+    }
+  }
+
+  &.disabled {
+    &,
+    label {
+      cursor: not-allowed;
     }
   }
 `;
@@ -77,5 +101,6 @@ type CheckboxProps = {
   name: string;
   checked?: boolean;
   label?: JSX.Element | string;
+  disabled?: boolean;
   onChange?: (name: string, value: boolean) => void;
 };
