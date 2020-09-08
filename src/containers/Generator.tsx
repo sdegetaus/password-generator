@@ -17,8 +17,6 @@ export default () => {
           numbers: true,
           lowercase: true,
           uppercase: true,
-          accented: true,
-          exclude_ambiguous: false,
         }
       : prefs;
   });
@@ -36,8 +34,7 @@ export default () => {
       !mValues.symbols &&
       !mValues.numbers &&
       !mValues.lowercase &&
-      !mValues.uppercase &&
-      !mValues.accented
+      !mValues.uppercase
     ) {
       mSetError({
         error: true,
@@ -49,15 +46,6 @@ export default () => {
         error: false,
         message: "",
       });
-    }
-
-    if (
-      mValues.uppercase === false &&
-      mValues.lowercase === false &&
-      mValues.accented === true
-    ) {
-      mSetValues({ ...mValues, accented: false });
-      return;
     }
 
     // set random password
@@ -147,7 +135,7 @@ const StyledGenerator = styled.form`
     color: black;
   }
   .range {
-    margin-bottom: 25px;
+    margin-bottom: 40px;
   }
   fieldset {
     margin: 10px 0 20px;
@@ -227,7 +215,7 @@ const includeData = [
   {
     label: (
       <>
-        Symbols <span>(e.g. @#$%)</span>
+        Symbols <span>(e.g. _-=?*!&amp;)</span>
       </>
     ),
     name: ID.symbols,
@@ -255,24 +243,5 @@ const includeData = [
       </>
     ),
     name: ID.uppercase,
-  },
-  {
-    label: (
-      <>
-        Accents <span>(e.g. áñöû)</span>
-      </>
-    ),
-    name: ID.accented,
-  },
-  {
-    label: (
-      <>
-        Exclude Ambiguous Characters{" "}
-        <span>
-          (e.g. {"{}"}[]()/\'"`~,;:.{"<>"})
-        </span>
-      </>
-    ),
-    name: ID.exclude_ambiguous,
   },
 ];

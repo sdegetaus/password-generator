@@ -1,5 +1,4 @@
 export const ID = {
-  accented: "accented",
   hidden: "hidden",
   length: "length",
   lowercase: "lowercase",
@@ -8,5 +7,4 @@ export const ID = {
   text: "text",
   uppercase: "uppercase",
   prefs: "prefs",
-  exclude_ambiguous: "exclude_ambiguous",
 };

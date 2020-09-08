@@ -12,17 +12,12 @@ export function randomPassword(
     numbers: boolean;
     lowercase: boolean;
     uppercase: boolean;
-    accented: boolean;
-    exclude_ambiguous: boolean;
   }
 ): string {
   // char sets
-  const symbols = !include.exclude_ambiguous
-    ? ";,:.!?/\\(){}[]<>+-_*=^~`'°|¬@#$%&"
-    : "!?+-_*=@#$%&";
+  const symbols = "_-=?*!&";
   const digits = "0123456789";
   const alphabet = "abdcefghijklmnopqrstuvwxyz";
-  const accented = "áéíóúàèìòùâêîôûñäëïöü";
 
   // sum of all the "true" values from the include param
   const boolSum = [
@@ -57,19 +52,11 @@ export function randomPassword(
       continue;
     }
     if (include.lowercase && chanceOf(chance)) {
-      if (include.accented && chanceOf(0.35)) {
-        res += randomCharFromString(accented);
-      } else {
-        res += randomCharFromString(alphabet);
-      }
+      res += randomCharFromString(alphabet);
       continue;
     }
     if (include.uppercase && chanceOf(chance)) {
-      if (include.accented && chanceOf(0.35)) {
-        res += randomCharFromString(accented.toUpperCase());
-      } else {
-        res += randomCharFromString(alphabet.toUpperCase());
-      }
+      res += randomCharFromString(alphabet.toUpperCase());
       continue;
     }
   }
