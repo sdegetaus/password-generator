@@ -5,13 +5,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "assets";
 import packageJson from "../package.json";
-import AppWrapper from "./containers/AppWrapper";
+import { IntlProvider } from "react-intl";
+import { AppLanguage } from "assets/l10n";
 
 export default () => {
   useRenderCount("App");
 
   return (
-    <AppWrapper>
+    <IntlProvider locale={AppLanguage.locale} messages={AppLanguage.messages}>
       <ErrorHandler>
         <Router>
           <StyledApp>
@@ -31,7 +32,7 @@ export default () => {
           </StyledApp>
         </Router>
       </ErrorHandler>
-    </AppWrapper>
+    </IntlProvider>
   );
 };
 
