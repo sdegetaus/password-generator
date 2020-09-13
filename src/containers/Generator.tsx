@@ -1,13 +1,15 @@
+import { colors } from "assets";
 import { Button, Checkbox, Range, Tooltip } from "components";
 import { ID } from "consts";
 import React, { useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { randomPassword } from "snippets/generator";
 import { getPrefs, savePrefs } from "snippets/prefs";
 import styled from "styled-components";
-import { colors } from "assets";
 
 export default () => {
   // File members
+  const intl = useIntl();
   const [mValues, mSetValues] = useState(() => {
     const prefs = getPrefs();
     return prefs === null
@@ -21,7 +23,7 @@ export default () => {
       : prefs;
   });
 
-  const [mError, mSetError] = useState({
+  const [mError, mSetError] = useState<{ error: boolean; message: string }>({
     error: false,
     message: "",
   });
@@ -38,7 +40,7 @@ export default () => {
     ) {
       mSetError({
         error: true,
-        message: "Please select at least one character set!",
+        message: intl.formatMessage({ id: "error.noSettingsSelected" }),
       });
       return;
     } else {
@@ -60,7 +62,7 @@ export default () => {
     savePrefs({
       ...mValues,
     });
-  }, [mValues]);
+  }, [mValues, intl]);
 
   // Functions
   const handleChange = async (name: string, value: unknown) => {
@@ -80,14 +82,18 @@ export default () => {
   return (
     <StyledGenerator onSubmit={(e) => e.preventDefault()}>
       <Range
-        label={`Character Length (${mValues.length})`}
+        label={`${intl.formatMessage({ id: "global.charLength" })} (${
+          mValues.length
+        })`}
         name={ID.length}
         min={8}
         max={512}
         value={Number(mValues.length)}
         onChange={handleChange}
       />
-      <h4>Include</h4>
+      <h4>
+        <FormattedMessage id="global.include" />
+      </h4>
       <fieldset className="checkbox-group">
         {includeData.map((o) => (
           <Checkbox
@@ -100,7 +106,9 @@ export default () => {
         ))}
       </fieldset>
       <section className="actions">
-        <h4>Actions</h4>
+        <h4>
+          <FormattedMessage id="global.actions" />
+        </h4>
         <Button
           onClick={() => {
             mSetPassword(
@@ -111,11 +119,15 @@ export default () => {
             mSetHasCopied(false);
           }}
         >
-          Regenerate
+          <FormattedMessage id="global.regenerate" />
         </Button>
       </section>
       <Tooltip
-        label={`${!mHasCopied ? "Copy to Clipboard" : "Copied to Clipboard!"}`}
+        label={`${
+          !mHasCopied
+            ? intl.formatMessage({ id: "global.copyToClipboard" })
+            : intl.formatMessage({ id: "global.copiedToClipboard" })
+        }`}
       >
         <section
           className={`result ${mError.error ? "error" : ""}`}
@@ -215,7 +227,10 @@ const includeData = [
   {
     label: (
       <>
-        Symbols <span>(e.g. _-=?*!&amp;)</span>
+        <FormattedMessage id="global.symbols" />{" "}
+        <span>
+          (<FormattedMessage id="global.eg" /> _-=?*!&amp;)
+        </span>
       </>
     ),
     name: ID.symbols,
@@ -223,7 +238,10 @@ const includeData = [
   {
     label: (
       <>
-        Numbers <span>(e.g. 0..9)</span>
+        <FormattedMessage id="global.numbers" />{" "}
+        <span>
+          (<FormattedMessage id="global.eg" /> 0..9)
+        </span>
       </>
     ),
     name: ID.numbers,
@@ -231,7 +249,10 @@ const includeData = [
   {
     label: (
       <>
-        Lowercase <span>(e.g. abcd)</span>
+        <FormattedMessage id="global.lowercase" />{" "}
+        <span>
+          (<FormattedMessage id="global.eg" /> abcd)
+        </span>
       </>
     ),
     name: ID.lowercase,
@@ -239,7 +260,10 @@ const includeData = [
   {
     label: (
       <>
-        Uppercase <span>(e.g. ABCD)</span>
+        <FormattedMessage id="global.uppercase" />{" "}
+        <span>
+          (<FormattedMessage id="global.eg" /> ABCD)
+        </span>
       </>
     ),
     name: ID.uppercase,

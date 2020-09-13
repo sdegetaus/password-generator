@@ -1,0 +1,19 @@
+{
+  "error.noSettingsSelected": "Please select at least one character set!",
+  "global.about": "About",
+  "global.actions": "Actions",
+  "global.numbers": "Numbers",
+  "global.charLength": "Character length",
+  "global.copyToClipboard": "Copy to clipboard",
+  "global.copiedToClipboard": "Copied to clipboard!",
+  "global.eg": "e.g.",
+  "global.lowercase": "Lowercase",
+  "global.uppercase": "Uppercase",
+  "global.include": "Include",
+  "global.generator": "Generator",
+  "global.symbols": "Symbols",
+  "global.regenerate": "Regenerate",
+  "about.content.0": "Simple React.js app for generating random passwords.",
+  "about.content.1": "Project solely meant for personal education reasons &ndash; created by {link}.",
+  "about.content.2": "See the {link} repository for more info about the project's learnings and goals."
+}

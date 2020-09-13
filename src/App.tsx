@@ -5,30 +5,33 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "assets";
 import packageJson from "../package.json";
+import AppWrapper from "./containers/AppWrapper";
 
 export default () => {
   useRenderCount("App");
 
   return (
-    <ErrorHandler>
-      <Router>
-        <StyledApp>
-          <section className="title">
-            <h1>Password Generator</h1>
-            <span>({packageJson.version})</span>
-          </section>
-          <section className="card">
-            <Menu />
-            <div className="content">
-              <Switch>
-                <Route path="/" component={Generator} exact />
-                <Route path="/about" component={About} />
-              </Switch>
-            </div>
-          </section>
-        </StyledApp>
-      </Router>
-    </ErrorHandler>
+    <AppWrapper>
+      <ErrorHandler>
+        <Router>
+          <StyledApp>
+            <section className="title">
+              <h1>Password Generator</h1>
+              <span>({packageJson.version})</span>
+            </section>
+            <section className="card">
+              <Menu />
+              <div className="content">
+                <Switch>
+                  <Route path="/" component={Generator} exact />
+                  <Route path="/about" component={About} />
+                </Switch>
+              </div>
+            </section>
+          </StyledApp>
+        </Router>
+      </ErrorHandler>
+    </AppWrapper>
   );
 };
 

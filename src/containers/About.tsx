@@ -2,33 +2,33 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "assets";
 import packageJson from "../../package.json";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export default () => {
+  const intl = useIntl();
   return (
     <StyledAbout>
-      <p>Simple React.js app for generating random passwords.</p>
-      <p>
-        Project solely meant for personal education reasons, created by{" "}
-        <a
-          href={packageJson.author.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {packageJson.author.name}
-        </a>
-        .
-      </p>
-      <p>
-        See the{" "}
-        <a
-          href={packageJson.repository.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub repository
-        </a>{" "}
-        for more info about the project's learnings and goals.
-      </p>
+      <FormattedMessage tagName="p" id="about.content.0" />
+      <p
+        dangerouslySetInnerHTML={{
+          __html: intl.formatMessage(
+            { id: "about.content.1" },
+            {
+              link: `<a href="${packageJson.author.url}" title="${packageJson.author.name}" target="_blank" rel="noopener noreferrer">${packageJson.author.name}</a>`,
+            }
+          ),
+        }}
+      />
+      <p
+        dangerouslySetInnerHTML={{
+          __html: intl.formatMessage(
+            { id: "about.content.2" },
+            {
+              link: `<a href="${packageJson.repository.url}" title="${packageJson.name}" target="_blank" rel="noopener noreferrer">GitHub</a>`,
+            }
+          ),
+        }}
+      />
     </StyledAbout>
   );
 };

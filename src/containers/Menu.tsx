@@ -1,7 +1,8 @@
+import { colors } from "assets";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "assets";
 
 export default () => {
   // File members
@@ -39,14 +40,19 @@ export default () => {
 
 const items: MenuItem[] = [
   {
-    label: "Generator",
+    label: <FormattedMessage id="global.generator" />,
     to: "/",
   },
   {
-    label: "About",
+    label: <FormattedMessage id="global.about" />,
     to: "/about",
   },
 ];
+
+type MenuItem = {
+  label: JSX.Element;
+  to: string;
+};
 
 const StyledTabs = styled.div`
   list-style: none;
@@ -83,8 +89,3 @@ const StyledTabs = styled.div`
     background-color: ${colors.bg.lightest};
   }
 `;
-
-type MenuItem = {
-  label: string;
-  to: string;
-};
