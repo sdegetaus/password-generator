@@ -1,20 +1,24 @@
 import React from "react";
 
-export default class ErrorHandler extends React.Component<any, any> {
+export default class ErrorHandler extends React.Component<
+  any,
+  { hasError: boolean }
+> {
   constructor(props: any) {
     super(props);
     this.state = { hasError: false };
   }
 
-  componentDidCatch(error: any, info: any) {
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.log(error.message);
     this.setState({ hasError: true });
   }
 
   render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
-    }
-    return this.props.children;
+    return this.state.hasError ? (
+      <h1>Something went wrong.</h1>
+    ) : (
+      this.props.children
+    );
   }
 }
