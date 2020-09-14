@@ -1,7 +1,7 @@
 import EnglishMessages from "./messages/en-US.json";
 import SpanishMessages from "./messages/es-MX.json";
 
-export const AppLocales = {
+export const LanguageData = {
   en: {
     locale: "en",
     messages: EnglishMessages,

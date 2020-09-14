@@ -1,28 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "assets";
+import { LanguageData } from "assets";
 
 export default (props: LanguageMenuProps) => {
+  const languages = Object.entries(LanguageData);
   return (
     <StyledLanguageMenu>
-      {[
-        {
-          key: "en",
-          displayName: "EN",
-        },
-        {
-          key: "es",
-          displayName: "ES",
-        },
-      ].map((o) => (
-        <li key={o.key}>
+      {languages.map(([key, values], i) => (
+        <li key={key}>
           <button
-            onClick={() => props.onChangeLanguage(o.key)}
-            className={props.locale === o.key ? "active" : ""}
-            disabled={props.locale === o.key}
+            onClick={() => props.onChangeLanguage(key)}
+            className={props.locale === key ? "active" : ""}
+            disabled={props.locale === key}
+            title={values.displayName}
           >
-            {o.displayName}
+            {values.displayName}
           </button>
+          {i !== languages.length - 1 && <span className="sep">&#8226;</span>}
         </li>
       ))}
     </StyledLanguageMenu>
@@ -58,6 +52,11 @@ const StyledLanguageMenu = styled.ul`
       cursor: default;
       opacity: 0.9;
     }
+  }
+
+  .sep {
+    color: white;
+    opacity: 0.8;
   }
 `;
 

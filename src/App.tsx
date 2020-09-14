@@ -1,5 +1,5 @@
 import { colors } from "assets";
-import { AppLocales as LanguageData } from "assets/l10n";
+import { LanguageData } from "assets/l10n";
 import { About, ErrorHandler, Generator, LanguageMenu, Menu } from "containers";
 import { useRenderCount } from "hooks";
 import React from "react";
