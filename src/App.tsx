@@ -1,23 +1,35 @@
-import { About, ErrorHandler, Generator, Menu } from "containers";
+import { colors } from "assets";
+import { AppLocales as LanguageData } from "assets/l10n";
+import { About, ErrorHandler, Generator, LanguageMenu, Menu } from "containers";
 import { useRenderCount } from "hooks";
 import React from "react";
+import { IntlProvider, FormattedMessage } from "react-intl";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "assets";
 import packageJson from "../package.json";
-import { IntlProvider } from "react-intl";
-import { AppLanguage } from "assets/l10n";
 
 export default () => {
   useRenderCount("App");
 
+  // File members
+  const [mLanguage, mSetLanguage] = React.useState(LanguageData.en);
+
+  // Functions
+  const handleLanguageChange = (locale: string) => {
+    if (mLanguage.locale === locale) {
+      return;
+    }
+    // @ts-ignore
+    mSetLanguage({ locale, messages: LanguageData[locale].messages });
+  };
+
   return (
-    <IntlProvider locale={AppLanguage.locale} messages={AppLanguage.messages}>
+    <IntlProvider locale={mLanguage.locale} messages={mLanguage.messages}>
       <ErrorHandler>
         <Router>
           <StyledApp>
             <section className="title">
-              <h1>Password Generator</h1>
+              <FormattedMessage tagName="h1" id="app.name" />
               <span>({packageJson.version})</span>
             </section>
             <section className="card">
@@ -29,6 +41,10 @@ export default () => {
                 </Switch>
               </div>
             </section>
+            <LanguageMenu
+              locale={mLanguage.locale}
+              onChangeLanguage={handleLanguageChange}
+            />
           </StyledApp>
         </Router>
       </ErrorHandler>
@@ -67,7 +83,7 @@ const StyledApp = styled.div`
     padding: 25px;
     padding: 0;
     margin: 0;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
   }
   .content {
     padding: 25px;

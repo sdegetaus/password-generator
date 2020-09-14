@@ -1,4 +1,5 @@
 {
+  "app.name": "Password Generator",
   "error.noSettingsSelected": "Please select at least one character set!",
   "global.about": "About",
   "global.actions": "Actions",

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export default class ErrorHandler extends React.Component<
   any,
@@ -16,9 +17,11 @@ export default class ErrorHandler extends React.Component<
 
   render() {
     return this.state.hasError ? (
-      <h1>Something went wrong.</h1>
+      <StyledErrorHandler>Something went wrong.</StyledErrorHandler>
     ) : (
       this.props.children
     );
   }
 }
+
+const StyledErrorHandler = styled.div``;

@@ -1,12 +1,15 @@
-import EnglishMessages from "./messages/en_US.json";
-// import SpanishMessages from "./messages/es_MX.json";
+import EnglishMessages from "./messages/en-US.json";
+import SpanishMessages from "./messages/es-MX.json";
 
-export const AppLanguage: Language = {
-  messages: EnglishMessages,
-  locale: "en-US",
-};
-
-type Language = {
-  messages: any;
-  locale: string;
+export const AppLocales = {
+  en: {
+    locale: "en",
+    messages: EnglishMessages,
+    displayName: "English",
+  },
+  es: {
+    locale: "es",
+    messages: SpanishMessages,
+    displayName: "Español",
+  },
 };
