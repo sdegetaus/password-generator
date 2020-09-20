@@ -1,27 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default (props: TooltipProps) => {
+export default React.memo((props: TooltipProps) => {
   // File members
   const [mActive, mSetActive] = useState(false);
-
-  // Functions
-  const handleMouseEnter = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    mSetActive(true);
-  };
-
-  const handleMouseLeave = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    mSetActive(false);
-  };
-
   return (
     <StyledTooltip
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => mSetActive(true)}
+      onMouseLeave={() => mSetActive(false)}
     >
       {props.children}
       <span className={`tooltip ${mActive ? "active" : ""}`}>
@@ -29,7 +15,7 @@ export default (props: TooltipProps) => {
       </span>
     </StyledTooltip>
   );
-};
+});
 
 const StyledTooltip = styled.div`
   position: relative;

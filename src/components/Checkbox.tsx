@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "assets";
 
-export default (props: CheckboxProps) => {
+export default React.memo((props: CheckboxProps) => {
   const [mChecked, mSetChecked] = useState<boolean>();
   const [mDisabled, mSetDisabled] = useState<boolean>();
 
@@ -11,17 +11,20 @@ export default (props: CheckboxProps) => {
     mSetDisabled(props.disabled ?? false);
   }, [props.checked, props.disabled]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    if (mDisabled) {
-      return;
-    }
-    const checked = !mChecked;
-    if (props.onChange != null) {
-      props.onChange(props.name, checked);
-    }
-    mSetChecked(checked);
-  };
+  const handleClick = React.useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault();
+      if (mDisabled) {
+        return;
+      }
+      const checked = !mChecked;
+      if (props.onChange != null) {
+        props.onChange(props.name, checked);
+      }
+      mSetChecked(checked);
+    },
+    [props, mChecked, mDisabled]
+  );
 
   return (
     <StyledCheckbox
@@ -34,7 +37,7 @@ export default (props: CheckboxProps) => {
       {props.label && <label htmlFor={props.name}>{props.label}</label>}
     </StyledCheckbox>
   );
-};
+});
 
 const StyledCheckbox = styled.div`
   position: relative;
@@ -65,6 +68,11 @@ const StyledCheckbox = styled.div`
       border-width: 0 3px 3px 0;
       transform: rotate(45deg);
     }
+  }
+
+  label,
+  span {
+    cursor: pointer;
   }
 
   &.checked {

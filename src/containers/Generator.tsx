@@ -1,19 +1,20 @@
 import { colors } from "assets";
 import { Button, Checkbox, Range, Tooltip } from "components";
 import { ID } from "consts";
-import React, { useState } from "react";
+import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { randomPassword } from "snippets/generator";
-import { getPrefs, savePrefs } from "snippets/prefs";
+import { generatorPrefs } from "snippets/localStorage";
 import styled from "styled-components";
 
 export default () => {
   // File members
   const intl = useIntl();
-  const [mValues, mSetValues] = useState(() => {
-    const prefs = getPrefs();
+  const [mValues, mSetValues] = React.useState(() => {
+    const prefs = generatorPrefs.get();
     return prefs === null
       ? {
+          ...prefs,
           length: 32,
           symbols: true,
           numbers: true,
@@ -23,12 +24,15 @@ export default () => {
       : prefs;
   });
 
-  const [mError, mSetError] = useState<{ error: boolean; message: string }>({
+  const [mError, mSetError] = React.useState<{
+    error: boolean;
+    message: string;
+  }>({
     error: false,
     message: "",
   });
-  const [mPassword, mSetPassword] = useState("");
-  const [mHasCopied, mSetHasCopied] = useState(false);
+  const [mPassword, mSetPassword] = React.useState("");
+  const [mHasCopied, mSetHasCopied] = React.useState(false);
 
   React.useEffect(() => {
     // if all char sets are set to false: set error
@@ -59,25 +63,28 @@ export default () => {
     mSetHasCopied(false);
 
     // save
-    savePrefs({
+    generatorPrefs.save({
       ...mValues,
     });
   }, [mValues, intl]);
 
   // Functions
-  const handleChange = async (name: string, value: unknown) => {
-    mSetValues({
-      ...mValues,
-      [name]: value,
-    });
-  };
+  const handleChange = React.useCallback(
+    (name: string, value: unknown) => {
+      mSetValues({
+        ...mValues,
+        [name]: value,
+      });
+    },
+    [mValues]
+  );
 
-  const copyToClipboard = () => {
+  const copyToClipboard = React.useCallback(() => {
     if (!mError.error) {
       document.execCommand("copy");
       mSetHasCopied(true);
     }
-  };
+  }, [mError]);
 
   return (
     <StyledGenerator onSubmit={(e) => e.preventDefault()}>
@@ -95,7 +102,7 @@ export default () => {
         <FormattedMessage id="global.include" />
       </h4>
       <fieldset className="checkbox-group">
-        {includeData.map((o) => (
+        {checkboxes.map((o) => (
           <Checkbox
             key={o.name}
             label={o.label}
@@ -223,7 +230,7 @@ const StyledGenerator = styled.form`
   }
 `;
 
-const includeData = [
+const checkboxes = [
   {
     label: (
       <>

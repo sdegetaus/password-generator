@@ -3,7 +3,6 @@ import { IntlProvider } from "react-intl";
 import { L10N, L10NContext } from "../index";
 
 export default (props: L10NProviderProps) => {
-  // File members
   const [mLocale, mSetLocale] = React.useState(L10N.en.locale);
   const memoValue = React.useMemo(() => ({ mLocale, mSetLocale }), [
     mLocale,

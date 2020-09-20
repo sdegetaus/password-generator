@@ -1,14 +1,14 @@
 import { colors } from "assets";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-export default () => {
+export default React.memo(() => {
   // File members
-  const mHistory = useHistory();
+  const mLocation = useLocation();
   const [mActiveKey, mSetActiveKey] = React.useState(() => {
-    switch (mHistory.location.pathname.substring(1)) {
+    switch (mLocation.pathname.substring(1)) {
       default:
       case "":
         return 0;
@@ -18,9 +18,9 @@ export default () => {
   });
 
   // Functions
-  const handleClick = (key: number) => {
+  const handleClick = React.useCallback((key: number) => {
     mSetActiveKey(key);
-  };
+  }, []);
 
   return (
     <StyledTabs className="tabs">
@@ -36,9 +36,9 @@ export default () => {
       ))}
     </StyledTabs>
   );
-};
+});
 
-const items: MenuItem[] = [
+const items: { label: JSX.Element; to: string }[] = [
   {
     label: <FormattedMessage id="global.generator" />,
     to: "/",
@@ -48,11 +48,6 @@ const items: MenuItem[] = [
     to: "/about",
   },
 ];
-
-type MenuItem = {
-  label: JSX.Element;
-  to: string;
-};
 
 const StyledTabs = styled.div`
   list-style: none;

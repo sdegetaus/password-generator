@@ -6,7 +6,8 @@ export const ID = {
   symbols: "symbols",
   text: "text",
   uppercase: "uppercase",
-  prefs: "prefs",
+  generatorPrefs: "generatorPrefs",
+  locale: "locale",
 };
 
 export const ROUTES = {
