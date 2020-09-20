@@ -2,7 +2,7 @@
 
 Simple React.js app for generating random passwords. Project solely meant for personal education reasons.
 
-**Learn Objectives**
+## Objectives
 
 - Create a complete React.js app from scratch
   - Project structure
@@ -14,5 +14,6 @@ Simple React.js app for generating random passwords. Project solely meant for pe
 - Routing with `react-router-dom`
 - Use the `localStorage`
 - How to use `styled-components`
-- _(pending)_ ~~Localize the app~~
-- _(pending)_ ~~Error handling~~
+- Localize the app with `react-intl`
+- Error handling
+- _(pending)_ ~~Testing~~
