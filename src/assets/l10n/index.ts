@@ -1,7 +1,8 @@
+import { createContext } from "react";
 import EnglishMessages from "./messages/en-US.json";
 import SpanishMessages from "./messages/es-MX.json";
 
-export const LanguageData = {
+export const L10N = {
   en: {
     locale: "en",
     messages: EnglishMessages,
@@ -13,3 +14,6 @@ export const LanguageData = {
     displayName: "Español",
   },
 };
+
+export const L10NContext = createContext<any>({});
+export { default as L10NProvider } from "./Provider";

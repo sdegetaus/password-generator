@@ -1,17 +1,19 @@
+import { L10N, L10NContext } from "assets";
 import React from "react";
 import styled from "styled-components";
-import { LanguageData } from "assets";
 
-export default (props: LanguageMenuProps) => {
-  const languages = Object.entries(LanguageData);
+export default () => {
+  const languages = Object.entries(L10N);
+  const { mLocale, mSetLocale } = React.useContext(L10NContext);
+
   return (
-    <StyledLanguageMenu>
+    <StyledFooter>
       {languages.map(([key, values], i) => (
         <li key={key}>
           <button
-            onClick={() => props.onChangeLanguage(key)}
-            className={props.locale === key ? "active" : ""}
-            disabled={props.locale === key}
+            onClick={() => mSetLocale(key)}
+            className={mLocale === key ? "active" : ""}
+            disabled={mLocale === key}
             title={values.displayName}
           >
             {values.displayName}
@@ -19,20 +21,19 @@ export default (props: LanguageMenuProps) => {
           {i !== languages.length - 1 && <span className="sep">&#8226;</span>}
         </li>
       ))}
-    </StyledLanguageMenu>
+    </StyledFooter>
   );
 };
 
-const StyledLanguageMenu = styled.ul`
+const StyledFooter = styled.ol`
   list-style: none;
   padding: 0;
-  margin: 0;
   width: 100%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   width: 650px;
-
+  margin: 40px 0;
   button {
     padding: 5px 10px;
     transition: all 0.3s;
@@ -53,14 +54,8 @@ const StyledLanguageMenu = styled.ul`
       opacity: 0.9;
     }
   }
-
   .sep {
     color: white;
     opacity: 0.8;
   }
 `;
-
-type LanguageMenuProps = {
-  locale: string;
-  onChangeLanguage: (locale: string) => void;
-};

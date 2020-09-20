@@ -8,3 +8,14 @@ export const ID = {
   uppercase: "uppercase",
   prefs: "prefs",
 };
+
+export const ROUTES = {
+  PAGE: {
+    GENERATOR: "/",
+    ABOUT: "about",
+  },
+  ERROR: {
+    E404: "404",
+    E500: "500",
+  },
+};

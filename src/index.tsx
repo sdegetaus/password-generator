@@ -1,11 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "App";
-import "assets/styles/global.scss";
+import AppContainer from "app/AppContainer";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+ReactDOM.render(<AppContainer />, document.getElementById("root"));
