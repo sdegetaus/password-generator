@@ -1,6 +1,8 @@
 {
   "app.name": "Password Generator",
   "error.noSettingsSelected": "Please select at least one character set!",
+  "error.404": "Page not found!",
+  "error.500": "Error!",
   "global.about": "About",
   "global.actions": "Actions",
   "global.numbers": "Numbers",

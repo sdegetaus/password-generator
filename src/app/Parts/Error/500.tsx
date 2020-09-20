@@ -1,20 +1,25 @@
+import { colors } from "assets";
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { StyledError } from "./StyledError";
 
-class ErrorScreen extends React.Component<any, { hasError: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = { hasError: false };
-  }
+export default () => {
+  return (
+    <Styled500Page>
+      <div className="container">
+        <h1 className="title">
+          <FormattedMessage id="error.500" />
+        </h1>
+        <div className="actions">
+          <Link to={"/"}>Back Home</Link>
+        </div>
+      </div>
+    </Styled500Page>
+  );
+};
 
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.log(error, info);
-    this.setState({ hasError: true });
-  }
-
-  render() {
-    return this.state.hasError ? <>Error!!!!</> : this.props.children;
-  }
-}
-
-export default withRouter(ErrorScreen);
+const Styled500Page = styled(StyledError)`
+  background-color: ${colors.red.base};
+`;

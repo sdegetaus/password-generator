@@ -1,6 +1,8 @@
 {
   "app.name": "Generador de Contraseñas",
   "error.noSettingsSelected": "¡Selecciona al menos un set de caracteres!",
+  "error.404": "¡Página no encontrada!",
+  "error.500": "¡Hubo un error!",
   "global.about": "Acerca",
   "global.actions": "Acciones",
   "global.numbers": "Números",

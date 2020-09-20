@@ -1,17 +1,12 @@
 import { colors } from "assets";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 export default () => {
   // File members
   const mHistory = useHistory();
-
-  // TODO:
-  const mParams = useParams();
-  console.log(mParams);
-
   const [mActiveKey, mSetActiveKey] = React.useState(() => {
     switch (mHistory.location.pathname.substring(1)) {
       default:
