@@ -16,6 +16,7 @@
   "global.generator": "Generador",
   "global.symbols": "Símbolos",
   "global.regenerate": "Regenerar",
+  "global.loading": "Cargando...",
   "about.content.0": "Sencilla aplicación en React.js para generar contraseñas aleatorias.",
   "about.content.1": "Proyecto desarrollado con fines de educación personal &ndash; creado por {link}.",
   "about.content.2": "Visita el repositorio en {link} para más información acerca de los objetivos y aprendizajes de este proyecto."

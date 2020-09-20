@@ -1,11 +1,18 @@
 import { ROUTES } from "consts";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { Card, ErrorScreen, Footer, Header, StyledLayout } from "./Parts";
+import {
+  Card,
+  ErrorScreen,
+  Footer,
+  Header,
+  Loader,
+  StyledLayout,
+} from "./Parts";
 
 export default () => {
   return (
-    <Suspense fallback={<>fallback</>}>
+    <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <ErrorScreen>
           <Switch>

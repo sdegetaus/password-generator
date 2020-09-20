@@ -33,7 +33,7 @@ const StyledFooter = styled.ol`
   justify-content: center;
   align-items: center;
   width: 650px;
-  margin: 40px 0;
+  margin: 30px 0;
   button {
     padding: 5px 10px;
     transition: all 0.3s;
