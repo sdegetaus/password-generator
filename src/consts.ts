@@ -1,13 +1,13 @@
 export const ID = {
+  generator: "generator",
   hidden: "hidden",
   length: "length",
+  locale: "locale",
   lowercase: "lowercase",
   numbers: "numbers",
   symbols: "symbols",
   text: "text",
   uppercase: "uppercase",
-  generatorPrefs: "generatorPrefs",
-  locale: "locale",
 };
 
 export const ROUTES = {

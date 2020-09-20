@@ -2,11 +2,11 @@ import { ID } from "consts";
 
 export const generatorPrefs = {
   get: () => {
-    const prefs = localStorage.getItem(ID.generatorPrefs);
+    const prefs = localStorage.getItem(ID.generator);
     return prefs === null ? null : JSON.parse(prefs);
   },
   save: (values: object) => {
-    localStorage.setItem(ID.generatorPrefs, JSON.stringify(values));
+    localStorage.setItem(ID.generator, JSON.stringify(values));
   },
 };
 

@@ -4,7 +4,7 @@ import { ID } from "consts";
 import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { randomPassword } from "snippets/generator";
-import { generatorPrefs } from "snippets/localStorage";
+import { generatorPrefs } from "snippets/storage";
 import styled from "styled-components";
 
 export default () => {
@@ -14,7 +14,6 @@ export default () => {
     const prefs = generatorPrefs.get();
     return prefs === null
       ? {
-          ...prefs,
           length: 32,
           symbols: true,
           numbers: true,
