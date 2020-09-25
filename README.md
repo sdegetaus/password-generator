@@ -1,6 +1,8 @@
 # Password Generator App
 
-Simple React.js app for generating random passwords. Project solely meant for personal education reasons.
+Simple React.js app for generating random passwords.
+
+Project solely meant for personal education reasons.
 
 ## Objectives
 
@@ -16,4 +18,3 @@ Simple React.js app for generating random passwords. Project solely meant for pe
 - How to use `styled-components`
 - Localize the app with `react-intl`
 - Error handling
-- _(pending)_ ~~Testing~~
